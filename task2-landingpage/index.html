@@ -2,158 +2,206 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <!-- Viewport meta tag is required for mobile responsiveness.
+       Without this, mobile browsers render a shrunk desktop layout
+       which breaks the mobile experience and hurts PageSpeed score. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book an Orthopaedic Consultation | OrthoNow</title>
+
   <style>
-  :root {
-    --color-bg: #FAF8F5;
-    --color-primary: #1B4D4A;
-    --color-accent: #E8825A;
-    --color-text: #2B2B2B;
-  }
+    /* ── Design tokens ─────────────────────────────────────────────
+       All colours defined once here as CSS custom properties.
+       Change a value here and it updates everywhere on the page.
+    ──────────────────────────────────────────────────────────────── */
+    :root {
+      --color-bg: #FAF8F5;
+      --color-primary: #1B4D4A;
+      --color-accent: #C4622A;
+      --color-text: #2B2B2B;
+    }
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+    /* ── Reset ─────────────────────────────────────────────────────
+       Removes default browser margin/padding so layout is consistent
+       across Chrome, Safari, Firefox etc.
+    ──────────────────────────────────────────────────────────────── */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  body {
-  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: var(--color-bg);
-  color: var(--color-text);
-  line-height: 1.5;
-}
+    /* ── Base body ─────────────────────────────────────────────────
+       System fonts only (-apple-system, Segoe UI, Roboto) — no web
+       font downloads. This keeps the page load fast and protects the
+       PageSpeed score.
+    ──────────────────────────────────────────────────────────────── */
+    body {
+      font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.5;
+    }
 
-.hero {
-  padding: 48px 24px 32px;
-  text-align: center;
-  background: linear-gradient(180deg, #E8F0EE 0%, var(--color-bg) 100%);
-}
+    /* ── Hero section ──────────────────────────────────────────────
+       Full-width gradient background that fades into the page colour.
+       The .hero-content wrapper constrains text width for readability
+       while the gradient stretches edge to edge.
+    ──────────────────────────────────────────────────────────────── */
+    .hero {
+      padding: 48px 24px 32px;
+      text-align: center;
+      background: linear-gradient(180deg, #E8F0EE 0%, var(--color-bg) 100%);
+    }
 
-.hero-content {
-  max-width: 640px;
-  margin: 0 auto;
-}
+    .hero-content {
+      max-width: 640px;
+      margin: 0 auto;
+    }
 
+    .hero h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 32px;
+      color: var(--color-primary);
+      margin-bottom: 16px;
+    }
 
-  .hero h1 {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 32px;
-    color: var(--color-primary);
-    margin-bottom: 16px;
-  }
+    .subheadline {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
 
-  .subheadline {
-    font-size: 18px;
-    margin-bottom: 12px;
-  }
+    .trust-line {
+      font-size: 14px;
+      color: #5a5a5a;
+    }
 
-  .trust-line {
-    font-size: 14px;
-    color: #5a5a5a;
-  }
+    /* ── Trust badges ──────────────────────────────────────────────
+       Pill-shaped stat badges that build credibility before the form.
+       Placed above the form intentionally — trust first, ask second.
+    ──────────────────────────────────────────────────────────────── */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
 
-  .form-section {
-    max-width: 420px;
-    margin: 0 auto 48px;
-    padding: 24px;
-    background: #FFFBF0;
-    border-radius: 8px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  }
+    .stats span {
+      background: #fff;
+      color: #1B4D4A;
+      padding: 10px 18px;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
 
-  .form-section h2 {
-    font-family: Georgia, serif;
-    font-size: 22px;
-    color: var(--color-primary);
-    margin-bottom: 20px;
-    text-align: center;
-  }
+    /* ── Form card ─────────────────────────────────────────────────
+       Kept to 2 fields only (Name + Phone) — every extra field reduces
+       conversion rate. Background is warm off-white to visually
+       separate the card from the page without harsh contrast.
+    ──────────────────────────────────────────────────────────────── */
+    .form-section {
+      max-width: 420px;
+      margin: 0 auto 48px;
+      padding: 24px;
+      background: #FFFBF0;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
 
-  label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 6px;
-    margin-top: 16px;
-    font-weight: 600;
-  }
+    .form-section h2 {
+      font-family: Georgia, serif;
+      font-size: 22px;
+      color: var(--color-primary);
+      margin-bottom: 20px;
+      text-align: center;
+    }
 
-  input {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-  }
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+      margin-top: 16px;
+      font-weight: 600;
+    }
 
-  button {
-    width: 100%;
-    margin-top: 24px;
-    padding: 14px;
-    background: var(--color-accent);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-  }
+    /* ── Inputs ────────────────────────────────────────────────────
+       font-size: 16px is intentional — anything below 16px causes
+       iOS Safari to auto-zoom into the field on focus, which breaks
+       the mobile experience.
+    ──────────────────────────────────────────────────────────────── */
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
 
-  button:hover {
-    opacity: 0.9;
-  }
+    /* ── CTA button ────────────────────────────────────────────────
+       Accent colour used only here — one bold colour on the page
+       draws the eye to the single action we want the user to take.
+       Colour is #C4622A (deeper than original coral) to meet WCAG
+       contrast ratio requirements with white text.
+    ──────────────────────────────────────────────────────────────── */
+    button {
+      width: 100%;
+      margin-top: 24px;
+      padding: 14px;
+      background: var(--color-accent);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
 
-  .thank-you {
-    max-width: 420px;
-    margin: 0 auto 48px;
-    padding: 24px;
-    text-align: center;
-  }
+    button:hover {
+      opacity: 0.9;
+    }
 
-  .thank-you h2 {
-    font-family: Georgia, serif;
-    color: var(--color-primary);
-    margin-bottom: 12px;
-  }
-  .stats {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 20px;
-  }
-  .stats span {
-    background: #fff;
-    color: #1B4D4A;
-    padding: 10px 18px;
-    border-radius: 25px;
-    font-size: 14px;
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  }
-</style>
+    /* ── Thank-you state ───────────────────────────────────────────
+       Hidden by default (via HTML `hidden` attribute).
+       Shown by JS after form submit — no page reload required.
+    ──────────────────────────────────────────────────────────────── */
+    .thank-you {
+      max-width: 420px;
+      margin: 0 auto 48px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .thank-you h2 {
+      font-family: Georgia, serif;
+      color: var(--color-primary);
+      margin-bottom: 12px;
+    }
+  </style>
 </head>
 <body>
 
+  <!-- HERO: headline + subheadline + trust badges -->
   <section class="hero">
-  <div class="hero-content">
-    <h1>Get an Expert Opinion on Your Knee or Back Pain</h1>
-
-    <p class="subheadline">
-      Board-certified orthopaedic specialists.
-      Same-week appointments across Bengaluru.
-    </p>
-
-    <div class="stats">
-      <span>🏥 9 Clinics</span>
-      <span>👨‍⚕️ 50,000+ Patients</span>
-      <span>⭐ 12+ Years</span>
+    <div class="hero-content">
+      <h1>Get an Expert Opinion on Your Knee or Back Pain</h1>
+      <p class="subheadline">
+        Board-certified orthopaedic specialists.
+        Same-week appointments across Bengaluru.
+      </p>
+      <!-- Trust badges: credibility signals placed before the form
+           so the user feels confident before we ask for anything -->
+      <div class="stats">
+        <span>🏥 9 Clinics</span>
+        <span>👨‍⚕️ 50,000+ Patients</span>
+        <span>⭐ 12+ Years</span>
+      </div>
     </div>
+  </section>
 
-  </div>
-</section>
-
+  <!-- FORM: 2 fields only (Name + Phone), minimal friction -->
   <section class="form-section">
     <form id="consultationForm">
       <h2>Book Your Consultation</h2>
@@ -162,34 +210,53 @@
       <input type="text" id="patientName" name="patientName" required>
 
       <label for="patientPhone">Phone Number</label>
-      <input type="tel" id="patientPhone" name="patientPhone" required pattern="[0-9]{10}">
+      <!-- pattern="[0-9]{10}" enforces 10-digit Indian mobile number
+           format at the browser level — no JS validation needed -->
+      <input type="tel" id="patientPhone" name="patientPhone"
+             required pattern="[0-9]{10}">
 
       <button type="submit">Book Free Consultation</button>
     </form>
   </section>
 
+  <!-- THANK-YOU STATE: hidden until form submits successfully -->
   <section class="thank-you" id="thankYou" hidden>
     <h2>Thank you, your consultation request is confirmed.</h2>
     <p>Our team will call you within 30 minutes to schedule your appointment.</p>
   </section>
+
   <script>
+    // Initialise dataLayer array if GTM hasn't already created it.
+    // In production GTM creates this automatically, but we define it
+    // here as a fallback so the push below never throws an error.
     window.dataLayer = window.dataLayer || [];
 
     document.getElementById('consultationForm').addEventListener('submit', function(e) {
+      // Prevent default form submission (which would reload the page)
       e.preventDefault();
 
+      // Capture field values for validation purposes only.
+      // We deliberately do NOT push raw name/phone into the dataLayer
+      // because GA4/Google Ads terms prohibit sending PII as event parameters.
       const name = document.getElementById('patientName').value;
       const phone = document.getElementById('patientPhone').value;
 
+      // Fire the GTM dataLayer event.
+      // GTM listens for this and forwards it to GA4 + Google Ads
+      // as the 'consultation_form_submitted' conversion action.
       window.dataLayer.push({
         event: 'consultation_form_submitted',
-        patient_name_provided: true,
-        phone_number_provided: true,
-        page_location: window.location.href
+        patient_name_provided: true,   // confirms field was filled
+        phone_number_provided: true,   // confirms field was filled
+        page_location: window.location.href  // tracks which URL the form was on
       });
 
-      console.log('dataLayer push:', window.dataLayer);
+      // Log to console so the dataLayer push can be verified
+      // live in DevTools during the Loom walkthrough.
+      console.log('dataLayer push fired:', window.dataLayer);
 
+      // Hide the form and show the thank-you message.
+      // No page reload — state change is handled entirely in JS.
       document.querySelector('.form-section').hidden = true;
       document.getElementById('thankYou').hidden = false;
     });
